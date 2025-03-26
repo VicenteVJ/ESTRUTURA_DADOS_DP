@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"><!--Ele irá aceitar a pontuação e acentos do texto-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila com Interface Gráfica</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; height: 100vh; justify-content: center; background-color: #f0f2f5; }
+        .container { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); width: 100%; max-width: 400px; text-align: center; }
+        .fila { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+        .item { background-color: #4CAF50; color: #fff; padding: 10px 20px; border-radius: 8px; }
+        button { margin-top: 10px; padding: 10px 20px; background-color: #6200ea; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #3700b3; }
+        input { padding: 8px; width: 80%; border: 2px solid #6200ea; border-radius: 8px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fila com Interface Gráfica</h1>
+        <input type="number" id="valor" placeholder="Digite um número">
+        <button onclick="inserirNaFila()">Inserir</button>
+        <button onclick="removerDaFila()">Remover</button>
+        <div class="fila" id="fila"></div>
+    </div>
+
+    <script>
+        
+        class Queue { 
+            constructor() {
+                this.items = [];
+            }
+        
+            enqueue(element) {
+                this.items.push(element);
+                this.items.sort((a, b) => a - b); // Ordena os elementos
+                this.atualizarFila();
+            }
+        
+            dequeue() {
+                if (this.isEmpty()) {
+                    alert("Fila vazia! Nada para remover.");
+                    return;
+                }
+                this.items.shift();
+                this.atualizarFila();
+            }
+        
+            isEmpty() {
+                return this.items.length === 0;
+            }
+        
+            atualizarFila() {
+                const filaElemento = document.getElementById("fila");
+                filaElemento.innerHTML = this.items.map(item => `<div class="item">${item}</div>`).join("");
+            }
+        }
+
+        const fila = new Queue();
+
+        function inserirNaFila() {
+            const valor = document.getElementById("valor").value;
+            if (valor.trim() === "") {
+                alert("Por favor, insira um valor.");
+                return;
+            }
+            fila.enqueue(valor);
+            document.getElementById("valor").value = "";  // Limpar o campo após inserir
+        }
+
+        function removerDaFila() {
+            fila.dequeue();
+        }
+    </script>
+</body>
+</html>
