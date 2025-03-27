@@ -56,4 +56,6 @@ console.log('Busca em profundidade (DFS):')
 tree.depthFirstSearch() //saída esperada: A, 1, B, 2, C, 3, D
 
 console.log('\nBusca em largura (BFS):')
-tree.breadthFirstSearch() //saída esperada: A, 1, B, 2, C, 3, D
+tree.breadthFirstSearch() //saída esperada: A, 1, B, 2, C, 3, D.
+
+
